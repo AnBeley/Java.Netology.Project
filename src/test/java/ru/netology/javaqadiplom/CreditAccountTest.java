@@ -111,6 +111,18 @@ public class CreditAccountTest {
 
         Assertions.assertEquals(-5_000, account.getBalance());
     }
+    @Test
+    public void shouldPayIfAmountSmallerInitialBalance() {
+        CreditAccount account = new CreditAccount(
+                8_000,
+                5_000,
+                15
+        );
+
+        account.pay(2_000);
+
+        Assertions.assertEquals(6_000, account.getBalance());
+    }
 
     @Test
     public void shouldNotPayBeyondLimit() {
