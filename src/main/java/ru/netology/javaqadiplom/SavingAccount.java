@@ -1,5 +1,6 @@
 package ru.netology.javaqadiplom;
 
+
 /**
  * Сберегательный счёт
  * Может иметь баланс только в пределах от указанного минимального до указанного максимального включительно.
@@ -9,6 +10,7 @@ package ru.netology.javaqadiplom;
 public class SavingAccount extends Account {
     protected int minBalance;
     protected int maxBalance;
+
 
     /**
      * Создаёт новый объект сберегательного счёта с заданными параметрами.
@@ -56,6 +58,7 @@ public class SavingAccount extends Account {
         this.rate = rate;
     }
 
+
     /**
      * Операция оплаты с карты на указанную сумму.
      * В результате успешного вызова этого метода, баланс должен уменьшиться
@@ -71,14 +74,16 @@ public class SavingAccount extends Account {
         if (amount <= 0) {
             return false;
         }
-        if (balance - amount > minBalance)
+        if (balance - amount > minBalance) {
             balance = balance - amount;
+        }
         if (balance > minBalance) {
             return true;
         } else {
             return false;
         }
     }
+
 
     /**
      * Операция пополнения карты на указанную сумму.
@@ -105,6 +110,7 @@ public class SavingAccount extends Account {
         }
     }
 
+
     /**
      * Операция расчёта процентов на остаток счёта при условии, что
      * счёт не будет меняться год. Сумма процентов приводится к целому
@@ -118,11 +124,14 @@ public class SavingAccount extends Account {
         return balance / 100 * rate;
     }
 
+
     public int getMinBalance() {
         return minBalance;
     }
+
 
     public int getMaxBalance() {
         return maxBalance;
     }
 }
+

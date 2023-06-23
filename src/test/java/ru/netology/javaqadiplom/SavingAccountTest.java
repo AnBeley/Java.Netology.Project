@@ -5,7 +5,7 @@ import org.junit.jupiter.api.Test;
 
 public class SavingAccountTest {
 
-    @Test //проходит
+    @Test //не проходит
     public void shouldIllArgExceptNegativeInitialBalance() {
 
         Assertions.assertThrows(IllegalArgumentException.class, () -> {
@@ -18,7 +18,7 @@ public class SavingAccountTest {
         });
     }
 
-    @Test //проходит
+    @Test //не проходит
     public void shouldIllArgExceptNegativeMinBalance() {
 
         Assertions.assertThrows(IllegalArgumentException.class, () -> {
@@ -32,7 +32,7 @@ public class SavingAccountTest {
     }
 
 
-    @Test //проходит
+    @Test //не проходит
     public void shouldIllArgExceptNegativeMaxBalance() {
 
         Assertions.assertThrows(IllegalArgumentException.class, () -> {
@@ -45,7 +45,7 @@ public class SavingAccountTest {
         });
     }
 
-    @Test //проходит
+    @Test //не проходит
     public void shouldIllArgExceptNegativeMaxBalanceIsLowerMinBalance() {
 
         Assertions.assertThrows(IllegalArgumentException.class, () -> {
@@ -59,7 +59,7 @@ public class SavingAccountTest {
     }
 
 
-    @Test //проходит
+    @Test //не проходит
     public void shouldIllArgExceptInitialBalanceIsLowerMinBalance() {
 
         Assertions.assertThrows(IllegalArgumentException.class, () -> {
@@ -72,7 +72,7 @@ public class SavingAccountTest {
         });
     }
 
-    @Test //проходит
+    @Test //не проходит
     public void shouldIllArgExceptInitialBalanceIsMoreMaxBalance() {
 
         Assertions.assertThrows(IllegalArgumentException.class, () -> {
@@ -114,7 +114,7 @@ public class SavingAccountTest {
 
     }
 
-    @Test //проходит
+    @Test //не проходит
     public void shouldPayLowerMinBalance() {
 
         SavingAccount account = new SavingAccount(
@@ -130,7 +130,7 @@ public class SavingAccountTest {
     }
 
 
-    @Test //проходит
+    @Test //не проходит
     public void shouldAddLessThanMaxBalance() {
         SavingAccount account = new SavingAccount(
                 2_000,
@@ -141,6 +141,20 @@ public class SavingAccountTest {
         account.add(3_000);
 
         Assertions.assertEquals(2_000 + 3_000, account.getBalance());
+    }
+
+    @Test //проходит
+    public void shouldCalcPercentYearChange() {
+        SavingAccount account = new SavingAccount(
+                1000,
+                100,
+                10_000,
+                15
+        );
+        account.pay(800);
+        account.yearChange();
+
+        Assertions.assertEquals(30, account.yearChange());
     }
 
 }

@@ -4,18 +4,6 @@ import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
 public class CreditAccountTest {
-
-    @Test
-    public void zeroRateException() {
-        Assertions.assertThrows(IllegalArgumentException.class, () -> {
-            CreditAccount account = new CreditAccount(
-                    0,
-                    5_000,
-                    0
-            );
-        });
-    }
-
     @Test
     public void negativeRateException() {
         Assertions.assertThrows(IllegalArgumentException.class, () -> {
@@ -27,18 +15,18 @@ public class CreditAccountTest {
         });
     }
 
-    @Test
+    @Test // №10 исправлено
     public void negativeCreditLimitException() {
         Assertions.assertThrows(IllegalArgumentException.class, () -> {
             CreditAccount account = new CreditAccount(
-                    0,
+                    10,
                     -5_000,
                     15
             );
         });
     }
 
-    @Test
+    @Test // №12 исправлено
     public void negativeInitialBalanceException() {
         Assertions.assertThrows(IllegalArgumentException.class, () -> {
             CreditAccount account = new CreditAccount(
@@ -49,7 +37,7 @@ public class CreditAccountTest {
         });
     }
 
-    @Test
+    @Test // №15 исправлено
     public void shouldAddToPositiveBalance() {
         CreditAccount account = new CreditAccount(
                 100,
@@ -101,20 +89,20 @@ public class CreditAccountTest {
         Assertions.assertEquals(-5_000, account.getBalance());
     }
 
-    @Test
+    @Test // №14 исправлено
     public void shouldPayIfAmountSmallerInitialBalance() {
         CreditAccount account = new CreditAccount(
                 8_000,
-                5_000,
+                1_000,
                 15
         );
 
-        account.pay(2_000);
+        account.pay(8_500);
 
-        Assertions.assertEquals(6_000, account.getBalance());
+        Assertions.assertEquals(-500, account.getBalance());
     }
 
-    @Test
+    @Test // №13 исправлено
     public void shouldNotPayBeyondLimit() {
         CreditAccount account = new CreditAccount(
                 10,
@@ -141,19 +129,6 @@ public class CreditAccountTest {
     }
 
     @Test
-    public void shouldNotCalcRate() {
-        CreditAccount account = new CreditAccount(
-                10,
-                5_000,
-                15
-        );
-
-        account.yearChange();
-
-        Assertions.assertEquals(0, account.yearChange());
-    }
-
-    @Test
     public void shouldCalcRate() {
         CreditAccount account = new CreditAccount(
                 200,
@@ -164,5 +139,20 @@ public class CreditAccountTest {
         account.yearChange();
 
         Assertions.assertEquals(-30, account.yearChange());
+
+    }
+
+    // наверное лучше его удалить, так как на отрицательные значения выкидывает эксепшены
+    @Test
+    public void shouldNotCalcRate() {
+        CreditAccount account = new CreditAccount(
+                200,
+                5_000,
+                15
+        );
+
+        account.yearChange();
+
+        Assertions.assertEquals(0, account.yearChange());
     }
 }
