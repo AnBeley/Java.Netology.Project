@@ -146,12 +146,13 @@ public class SavingAccountTest {
     @Test //проходит
     public void shouldCalcPercentYearChange() {
         SavingAccount account = new SavingAccount(
-                200,
-                1_000,
+                1000,
+                100,
                 10_000,
                 15
         );
-
+        account.pay(800);
+        account.yearChange();
 
         Assertions.assertEquals(30, account.yearChange());
     }
