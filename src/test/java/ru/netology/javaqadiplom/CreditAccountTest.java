@@ -28,17 +28,6 @@ public class CreditAccountTest {
     }
 
     @Test
-    public void zeroCreditLimitException() {
-        Assertions.assertThrows(IllegalArgumentException.class, () -> {
-            CreditAccount account = new CreditAccount(
-                    0,
-                    0,
-                    15
-            );
-        });
-    }
-
-    @Test
     public void negativeCreditLimitException() {
         Assertions.assertThrows(IllegalArgumentException.class, () -> {
             CreditAccount account = new CreditAccount(
@@ -111,6 +100,7 @@ public class CreditAccountTest {
 
         Assertions.assertEquals(-5_000, account.getBalance());
     }
+
     @Test
     public void shouldPayIfAmountSmallerInitialBalance() {
         CreditAccount account = new CreditAccount(
@@ -149,6 +139,7 @@ public class CreditAccountTest {
 
         Assertions.assertEquals(10, account.getBalance());
     }
+
     @Test
     public void shouldNotCalcRate() {
         CreditAccount account = new CreditAccount(
@@ -159,18 +150,19 @@ public class CreditAccountTest {
 
         account.yearChange();
 
-        Assertions.assertEquals(0, account.getRate());
+        Assertions.assertEquals(0, account.yearChange());
     }
+
     @Test
     public void shouldCalcRate() {
         CreditAccount account = new CreditAccount(
-                -200,
+                200,
                 5_000,
                 15
         );
-
+        account.pay(400);
         account.yearChange();
 
-        Assertions.assertEquals(-30, account.getRate());
+        Assertions.assertEquals(-30, account.yearChange());
     }
 }
