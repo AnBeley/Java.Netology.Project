@@ -48,6 +48,9 @@ public class CreditAccountTest {
         account.add(5_000);
 
         Assertions.assertEquals(5_100, account.getBalance());
+        Assertions.assertEquals(5_000, account.getCreditLimit());
+        Assertions.assertEquals(15, account.getRate());
+
     }
 
     @Test
@@ -142,7 +145,7 @@ public class CreditAccountTest {
 
     }
 
-    // наверное лучше его удалить, так как на отрицательные значения выкидывает эксепшены
+
     @Test
     public void shouldNotCalcRate() {
         CreditAccount account = new CreditAccount(
@@ -155,4 +158,18 @@ public class CreditAccountTest {
 
         Assertions.assertEquals(0, account.yearChange());
     }
+
+    @Test
+    public void shouldNotCalcRateCheckFunc() {
+        CreditAccount account = new CreditAccount(
+                200,
+                5_000,
+                15
+        );
+        account.setRate(15);
+        account.yearChange();
+
+        Assertions.assertEquals(0, account.yearChange());
+    }
+
 }
