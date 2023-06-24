@@ -5,7 +5,9 @@ import org.junit.jupiter.api.Test;
 
 public class SavingAccountTest {
 
+
     @Test
+
     public void shouldIllArgExceptNegativeInitialBalance() {
 
         Assertions.assertThrows(IllegalArgumentException.class, () -> {
@@ -18,7 +20,9 @@ public class SavingAccountTest {
         });
     }
 
+
     @Test
+
     public void shouldIllArgExceptNegativeMinBalance() {
 
         Assertions.assertThrows(IllegalArgumentException.class, () -> {
@@ -32,7 +36,9 @@ public class SavingAccountTest {
     }
 
 
+
     @Test
+
     public void shouldIllArgExceptNegativeMaxBalance() {
 
         Assertions.assertThrows(IllegalArgumentException.class, () -> {
@@ -45,7 +51,9 @@ public class SavingAccountTest {
         });
     }
 
+
     @Test
+
     public void shouldIllArgExceptNegativeMaxBalanceIsLowerMinBalance() {
 
         Assertions.assertThrows(IllegalArgumentException.class, () -> {
@@ -60,6 +68,7 @@ public class SavingAccountTest {
 
 
     @Test
+
     public void shouldIllArgExceptInitialBalanceIsLowerMinBalance() {
 
         Assertions.assertThrows(IllegalArgumentException.class, () -> {
@@ -72,7 +81,9 @@ public class SavingAccountTest {
         });
     }
 
+
     @Test
+
     public void shouldIllArgExceptInitialBalanceIsMoreMaxBalance() {
 
         Assertions.assertThrows(IllegalArgumentException.class, () -> {
@@ -87,6 +98,7 @@ public class SavingAccountTest {
 
 
     @Test
+
     public void shouldIllArgExceptRate() {
 
         Assertions.assertThrows(IllegalArgumentException.class, () -> {
@@ -100,6 +112,7 @@ public class SavingAccountTest {
     }
 
     @Test
+
     public void shouldPayOverMinBalance() {
 
         SavingAccount account = new SavingAccount(
@@ -114,7 +127,9 @@ public class SavingAccountTest {
 
     }
 
+
     @Test
+
     public void shouldPayLowerMinBalance() {
 
         SavingAccount account = new SavingAccount(
@@ -161,6 +176,7 @@ public class SavingAccountTest {
 
 
     @Test
+  
     public void shouldAddLessThanMaxBalance() {
         SavingAccount account = new SavingAccount(
                 2_000,
@@ -172,6 +188,7 @@ public class SavingAccountTest {
 
         Assertions.assertEquals(2_000 + 3_000, account.getBalance());
     }
+
 
     @Test
     public void shouldNotAddIfAmountLessZero() {
