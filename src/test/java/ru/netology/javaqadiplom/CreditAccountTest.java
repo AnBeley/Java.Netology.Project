@@ -141,6 +141,7 @@ public class CreditAccountTest {
         account.pay(400);
         account.yearChange();
 
+
         Assertions.assertEquals(-30, account.yearChange());
 
     }
@@ -148,12 +149,10 @@ public class CreditAccountTest {
 
     @Test
     public void shouldNotCalcRate() {
-        CreditAccount account = new CreditAccount(
                 200,
                 5_000,
                 15
-        );
-
+        );   
         account.yearChange();
 
         Assertions.assertEquals(0, account.yearChange());
@@ -161,6 +160,7 @@ public class CreditAccountTest {
 
     @Test
     public void shouldNotCalcRateCheckFunc() {
+
         CreditAccount account = new CreditAccount(
                 200,
                 5_000,
@@ -171,5 +171,5 @@ public class CreditAccountTest {
 
         Assertions.assertEquals(0, account.yearChange());
     }
-
+  
 }

@@ -5,7 +5,9 @@ import org.junit.jupiter.api.Test;
 
 public class SavingAccountTest {
 
-    @Test //не проходит
+
+    @Test
+
     public void shouldIllArgExceptNegativeInitialBalance() {
 
         Assertions.assertThrows(IllegalArgumentException.class, () -> {
@@ -18,7 +20,9 @@ public class SavingAccountTest {
         });
     }
 
-    @Test //не проходит
+
+    @Test
+
     public void shouldIllArgExceptNegativeMinBalance() {
 
         Assertions.assertThrows(IllegalArgumentException.class, () -> {
@@ -32,7 +36,9 @@ public class SavingAccountTest {
     }
 
 
-    @Test //не проходит
+
+    @Test
+
     public void shouldIllArgExceptNegativeMaxBalance() {
 
         Assertions.assertThrows(IllegalArgumentException.class, () -> {
@@ -45,7 +51,9 @@ public class SavingAccountTest {
         });
     }
 
-    @Test //не проходит
+
+    @Test
+
     public void shouldIllArgExceptNegativeMaxBalanceIsLowerMinBalance() {
 
         Assertions.assertThrows(IllegalArgumentException.class, () -> {
@@ -59,7 +67,8 @@ public class SavingAccountTest {
     }
 
 
-    @Test //не проходит
+    @Test
+
     public void shouldIllArgExceptInitialBalanceIsLowerMinBalance() {
 
         Assertions.assertThrows(IllegalArgumentException.class, () -> {
@@ -72,7 +81,9 @@ public class SavingAccountTest {
         });
     }
 
-    @Test //не проходит
+
+    @Test
+
     public void shouldIllArgExceptInitialBalanceIsMoreMaxBalance() {
 
         Assertions.assertThrows(IllegalArgumentException.class, () -> {
@@ -86,7 +97,8 @@ public class SavingAccountTest {
     }
 
 
-    @Test //проходит
+    @Test
+
     public void shouldIllArgExceptRate() {
 
         Assertions.assertThrows(IllegalArgumentException.class, () -> {
@@ -99,7 +111,8 @@ public class SavingAccountTest {
         });
     }
 
-    @Test //проходит
+    @Test
+
     public void shouldPayOverMinBalance() {
 
         SavingAccount account = new SavingAccount(
@@ -114,7 +127,9 @@ public class SavingAccountTest {
 
     }
 
-    @Test //не проходит
+
+    @Test
+
     public void shouldPayLowerMinBalance() {
 
         SavingAccount account = new SavingAccount(
@@ -129,8 +144,39 @@ public class SavingAccountTest {
 
     }
 
+    @Test
+    public void shouldNotPayIfAmountLessZero() {
 
-    @Test //не проходит
+        SavingAccount account = new SavingAccount(
+                2_000,
+                0,
+                10_000,
+                5
+        );
+        account.pay(-100);
+
+        Assertions.assertEquals(2_000, account.getBalance());
+
+    }
+
+    @Test
+    public void shouldNotPayIfBalanceLowerMinBalance() {
+
+        SavingAccount account = new SavingAccount(
+                2_100,
+                2_000,
+                10_000,
+                5
+        );
+        account.pay(200);
+
+        Assertions.assertEquals(2_100, account.getBalance());
+
+    }
+
+
+    @Test
+  
     public void shouldAddLessThanMaxBalance() {
         SavingAccount account = new SavingAccount(
                 2_000,
@@ -143,7 +189,35 @@ public class SavingAccountTest {
         Assertions.assertEquals(2_000 + 3_000, account.getBalance());
     }
 
-    @Test //проходит
+
+    @Test
+    public void shouldNotAddIfAmountLessZero() {
+        SavingAccount account = new SavingAccount(
+                2_000,
+                1_000,
+                10_000,
+                5
+        );
+        account.add(-3_000);
+
+        Assertions.assertEquals(2_000, account.getBalance());
+    }
+
+    @Test
+    public void shouldNotAddIf() {
+        SavingAccount account = new SavingAccount(
+                2_000,
+                1_000,
+                10_000,
+                5
+        );
+        account.add(9_000);
+
+        Assertions.assertEquals(2_000, account.getBalance());
+    }
+
+
+    @Test
     public void shouldCalcPercentYearChange() {
         SavingAccount account = new SavingAccount(
                 1000,
