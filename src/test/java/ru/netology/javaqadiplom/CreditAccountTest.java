@@ -149,6 +149,7 @@ public class CreditAccountTest {
 
     @Test
     public void shouldNotCalcRate() {
+        CreditAccount account = new CreditAccount(    
                 200,
                 5_000,
                 15
